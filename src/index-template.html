@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>MicroFronts</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  </head>
+  <body>
+
+    <!-- Esquema para lidar com cache separado, estudar sobre ainda -->
+    <!-- "@portal/fetchWithCache": "http://localhost:8238/fetchWithCache.js" -->
+    <script>
+      String.prototype.hashCode = function() {
+        var hash = 0, i, chr;
+        if (this.length === 0) return hash;
+        for (i = 0; i < this.length; i++) {
+          chr   = this.charCodeAt(i);
+          hash  = ((hash << 5) - hash) + chr;
+          hash |= 0; // Convert to 32bit integer
+        }
+        return hash;
+      };
+    </script>
+    <script type="systemjs-importmap">
+      {
+        "imports": {
+          "@platafoor/config": "config.js",
+          "@platafoor/auth": "http://localhost:8235/auth.js",
+          "@platafoor/companies": "http://localhost:8236/companies.js"
+        }
+      }
+    </script>
+    <script src='https://unpkg.com/systemjs@4.1.0/dist/system.js'></script>
+    <script src='https://unpkg.com/systemjs@4.1.0/dist/extras/amd.js'></script>
+    <script src='https://unpkg.com/systemjs@4.1.0/dist/extras/named-exports.js'></script>
+    <script src='https://unpkg.com/systemjs@4.1.0/dist/extras/use-default.js'></script>
+
+    <!-- Load the common deps-->
+    <script src="http://localhost:8234/common-deps.js"></script>
+
+    <!-- Load the apps -->
+    <div id="content">
+      <div id="auth"></div>
+      <div id="companies"></div>
+    </div>
+
+    <!-- Load the root application -->
+    <script>
+      System.import('@platafoor/config')
+    </script>
+
+    <!-- Static scripts -->
+    <link rel="stylesheet" href="http://localhost:8233/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+  </body>
+</html>
