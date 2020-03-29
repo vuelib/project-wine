@@ -1,3 +1,3 @@
-# Project-wine
+# @Project-wine/Root
 
-## The root application
+## Micro frontend - Root application
